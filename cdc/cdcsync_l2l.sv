@@ -21,7 +21,7 @@ module cdcsync_l2l
   
   logic [FLOP_N-1:0] sync_flop;
   always_ff @(posedge des_clk or negedge des_rstn) begin
-    if(~rstn) sync_flop <= '0;
+    if(~des_rstn) sync_flop <= '0;
     else sync_flop <= {sync_flop[FLOP_N-2:0],src_lvl};
   end
 
