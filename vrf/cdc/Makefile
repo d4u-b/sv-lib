@@ -15,8 +15,8 @@ UVM_TEST ?= mem_wr_rd_test
 
 #VERILOG_DEFINE_FILES = ${UVM_ROOT}/src/uvm.sv ./hdl/tbench_top.sv ./hdl/design.sv
 #VERILOG_INCLUDE_DIRS = hdl ${UVM_ROOT}/src
-VERILOG_DEFINE_FILES = -f ${WA}/sv-lib/vrf/top.f
-VERILOG_INCLUDE_DIRS = ${WA}/sv-lib/vrf
+VERILOG_DEFINE_FILES = -f ${WA}/sv-lib/vrf/cdc/top.f
+VERILOG_INCLUDE_DIRS = ${WA}/sv-lib/vrf/cdc
 
 # -------------------------------------
 # Compilation/simulation configuration
