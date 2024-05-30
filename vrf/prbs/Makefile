@@ -52,6 +52,9 @@ simulate: $(SIM_DIR)/$(SIM_NAME).mk $(SIM_DIR)/$(SIM_NAME)
 wave:
 	gtkwave top.vcd &
 
+lint:
+	$(VERILATOR) --lint-only -Wall --timing ${VERILOG_DEFINE_FILES}
+
 clean:
 	rm -rf simv*.daidir csrc
 	rm -rf csrc* simv*

@@ -33,7 +33,6 @@ module top;
   //---------------------------------------
   parameter DATW = 64;
   parameter STA0 = 9;
-  parameter STA1 = 5;
   
   logic [STA0-1:0] iprbs_cur;
   logic [STA0-1:0] oprbs_nxt;
