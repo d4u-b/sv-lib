@@ -1,3 +1,3 @@
-$WA/sv-lib/vrf/cdc/top.sv
+$SVLIB/vrf/cdc/top.sv
       
       

@@ -1,4 +1,4 @@
       
--f $WA/sv-lib/vrf/prbs/rtl.f
--f $WA/sv-lib/vrf/prbs/tb.f
+-f $SVLIB/vrf/prbs/rtl.f
+-f $SVLIB/vrf/prbs/tb.f
 

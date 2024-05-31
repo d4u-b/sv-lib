@@ -52,7 +52,7 @@ else
         echo "No files found containing the string '$SEARCH_STRING'."
     else
         echo "$FILES" | while IFS= read -r FILE; do
-            sed -i.bak "s/${SEARCH_STRING}/${REPLACE_STRING}/g" "$FILE"
+            sed -i.bak "s|${SEARCH_STRING}|${REPLACE_STRING}|g" "$FILE"
             echo "Replaced '${SEARCH_STRING}' with '${REPLACE_STRING}' in file '${FILE}'."
         done
         echo "Replacement complete. Backup files with .bak extension have been created."

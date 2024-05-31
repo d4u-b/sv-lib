@@ -1,2 +1,2 @@
--f $WA/sv-lib/prbs/prbs.f
+-f $SVLIB/prbs/prbs.f
       

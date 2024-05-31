@@ -1,2 +1,2 @@
--f $WA/sv-lib/cdc/cdc.f
+-f $SVLIB/cdc/cdc.f
       

@@ -1,2 +1,2 @@
-$WA/sv-lib/cdc/cdcsync_l2l.sv
+$SVLIB/cdc/cdcsync_l2l.sv
       
