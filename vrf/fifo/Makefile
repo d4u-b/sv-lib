@@ -15,13 +15,13 @@ UVM_TEST ?= mem_wr_rd_test
 
 #VERILOG_DEFINE_FILES = ${UVM_ROOT}/src/uvm.sv ./hdl/tbench_top.sv ./hdl/design.sv
 #VERILOG_INCLUDE_DIRS = hdl ${UVM_ROOT}/src
-VERILOG_DEFINE_FILES = -f ${SVLIB}/vrf/prbs/top.f
-VERILOG_INCLUDE_DIRS = ${SVLIB}/vrf/prbs
+VERILOG_DEFINE_FILES = -f ${SVLIB}/vrf/fifo/top.f
+VERILOG_INCLUDE_DIRS = ${SVLIB}/vrf/fifo
 
 # -------------------------------------
 # Compilation/simulation configuration
 # -------------------------------------
-SIM_NAME ?= prbs_tb
+SIM_NAME ?= fifo_tb
 SIM_DIR := $(SIM_NAME)-sim
 COMPILE_ARGS += -DUVM_NO_DPI
 COMPILE_ARGS += --prefix $(SIM_NAME) -o $(SIM_NAME)
