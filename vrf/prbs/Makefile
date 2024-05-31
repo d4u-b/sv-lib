@@ -15,8 +15,8 @@ UVM_TEST ?= mem_wr_rd_test
 
 #VERILOG_DEFINE_FILES = ${UVM_ROOT}/src/uvm.sv ./hdl/tbench_top.sv ./hdl/design.sv
 #VERILOG_INCLUDE_DIRS = hdl ${UVM_ROOT}/src
-VERILOG_DEFINE_FILES = -f ${WA}/sv-lib/vrf/prbs/top.f
-VERILOG_INCLUDE_DIRS = ${WA}/sv-lib/vrf/prbs
+VERILOG_DEFINE_FILES = -f ${SVLIB}/vrf/prbs/top.f
+VERILOG_INCLUDE_DIRS = ${SVLIB}/vrf/prbs
 
 # -------------------------------------
 # Compilation/simulation configuration
@@ -41,7 +41,7 @@ $(SIM_DIR)/$(SIM_NAME).mk: $(wildcard hdl/*.sv)
 	$(VERILATOR) --cc --exe --main --timing -Mdir $(SIM_DIR) \
 	${COMPILE_ARGS} ${EXTRA_ARGS} \
 	${VERILOG_DEFINE_FILES} \
-	${WARNING_ARGS}
+	${SVLIBRNING_ARGS}
 
 $(SIM_DIR)/$(SIM_NAME): $(SIM_DIR)/$(SIM_NAME).mk
 	$(MAKE) -j${NPROC} -C $(SIM_DIR) $(BUILD_ARGS) -f $(SIM_NAME).mk
