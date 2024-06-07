@@ -27,7 +27,7 @@ module sync_fifo
 
    //Pop
    input                     fifo_re,
-   output [FIFO_W-1:0]       fifo_rd,
+   output logic [FIFO_W-1:0] fifo_rd,
    output logic              fifo_empt,
    output logic              fifo_udf,
 
