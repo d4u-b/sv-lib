@@ -12,7 +12,7 @@ class fifo_test extends fifo_base_test;
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
 
-    //create env
+    //create seq
     seq = fifo_base_sequence::type_id::create("seq");
   endfunction // build_phase
 

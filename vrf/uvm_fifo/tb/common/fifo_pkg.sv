@@ -2,10 +2,9 @@
  `define __FIFO_PKG_SV__
 
 package fifo_pkg;
-  import uvm_pkg::*;
 `include "uvm_macros.svh"
+  import uvm_pkg::*;
 
-`include "fifo_env.sv"
 `include "fifo_test.sv"
 
 endpackage // fifo_pkg

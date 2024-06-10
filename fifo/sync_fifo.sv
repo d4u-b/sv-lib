@@ -36,27 +36,27 @@ module sync_fifo
    input                     fifo_fsh
    );
 
-  /************************************************************************************************************** 
+  /**************************************************************************************************************
    * Declare variables
    **************************************************************************************************************/
   typedef enum        logic {FULL_ADR = 0, NFULL_ADR} fifo_type_e;
-  
+
   localparam fifo_type_e FIFO_MOD = (2**FIFO_ADR == FIFO_D) ? FULL_ADR : NFULL_ADR;
-  
+
   logic [FIFO_D-1:0][FIFO_W-1:0] fifo_reg;
   logic [FIFO_ADR-1:0]           fifo_rpointer;
   logic [FIFO_ADR-1:0]           fifo_wpointer;
   logic [FIFO_ADR:0]             fifo_count;
   logic                          fifo_wvld;
   logic                          fifo_rvld;
-  
-  /************************************************************************************************************** 
+
+  /**************************************************************************************************************
    * logic
    **************************************************************************************************************/
   assign fifo_wvld = fifo_we & (~fifo_full);
   assign fifo_rvld = fifo_re & (~fifo_empt);
-  
-  generate 
+
+  generate
     if(FIFO_MOD == FULL_ADR) begin:SFIFO_FADR
       always_ff @(posedge clk or negedge rstn) begin
         if(~rstn) fifo_rpointer <= '0;
@@ -98,7 +98,7 @@ module sync_fifo
       endcase
     end
   end
-  
+
   //Write data into memory
   always_ff @(posedge clk or negedge rstn) begin
     if(~rstn) fifo_reg <= '0;
@@ -117,16 +117,19 @@ module sync_fifo
       end
     end
   endgenerate
-  
-  /************************************************************************************************************** 
+
+  /**************************************************************************************************************
    * Output
    **************************************************************************************************************/
-  assign fifo_ovf = fifo_we & fifo_full;
-  assign fifo_udf = fifo_re & fifo_empt;
-  
+  //assign fifo_ovf = fifo_we & fifo_full;
+  //assign fifo_udf = fifo_re & fifo_empt;
+
+  assign fifo_ovf = '0;
+  assign fifo_udf = '0;
+
   assign fifo_full = (fifo_count == FIFO_D);
   assign fifo_empt = (fifo_count == '0);
-  
+
   assign fifo_len = fifo_count;
-  
+
 endmodule // sync_fifo

@@ -7,12 +7,13 @@
 // Last Modified On: Wed May 29 12:40:41 2024
 // Update Count    : 0
 // Status          : Unknown, Use with caution!
+
+module top;
+
 `include "uvm_pkg.sv"
 import uvm_pkg::*;
 import fifo_para_pkg::*;
 import fifo_pkg::*;
-
-module top;
 
 
   //---------------------------------------
@@ -40,7 +41,7 @@ module top;
   sfifo_dut_if sfifo_vif(clk,rstn);
 
 `include "svlib_macro.sv"
-  `sfifo_inst(test,11,16,0,clk,rstn)
+  `sfifo_inst(test,FF_D,FF_W,0,clk,rstn)
 
   assign test.fifo_we  = sfifo_vif.fifo_we;
   assign test.fifo_wd  = sfifo_vif.fifo_wd;
@@ -60,7 +61,7 @@ module top;
 
   // Connecting interface to UVM
   initial begin
-    uvm_config_db #(virtual sfifo_dut_if)::set(uvm_root::get(),"*","vif",sfifo_vif);
+    uvm_config_db#(virtual sfifo_dut_if)::set(uvm_root::get(),"*","vif",sfifo_vif);
   end
 
   // Testbench
