@@ -26,8 +26,10 @@ SIM_DIR := $(SIM_NAME)-sim
 COMPILE_ARGS += -DUVM_NO_DPI --top-module $(TOP)
 COMPILE_ARGS += --prefix $(SIM_NAME) -o $(SIM_NAME)
 EXTRA_ARGS += --trace-fst --timescale 1ns/1ps --error-limit 100
+#GTK_ARGS := -xml-only -bbox-sys
 WARNING_ARGS += -Wno-lint \
 	-Wno-style \
+	-Wno-fatal \
 	-Wno-SYMRSVDWORD \
 	-Wno-IGNOREDRETURN \
 	-Wno-CONSTRAINTIGN \
@@ -40,7 +42,8 @@ $(SIM_DIR)/$(SIM_NAME).mk: $(wildcard hdl/*.sv)
 	$(VERILATOR) --cc --exe --main --timing -Mdir $(SIM_DIR) \
 	${COMPILE_ARGS} ${EXTRA_ARGS} \
 	${VERILOG_DEFINE_FILES} \
-	${WARNING_ARGS}
+	${WARNING_ARGS} 
+#	${GTK_ARGS}
 
 $(SIM_DIR)/$(SIM_NAME): $(SIM_DIR)/$(SIM_NAME).mk
 	$(MAKE) -j${NPROC} -C $(SIM_DIR) $(BUILD_ARGS) -f $(SIM_NAME).mk

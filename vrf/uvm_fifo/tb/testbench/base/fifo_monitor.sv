@@ -17,6 +17,7 @@ class fifo_monitor extends uvm_monitor;
       `uvm_fatal("MON","Could not get vif")
   endfunction // build_phase
 
+`ifdef FIFO_TEST
   virtual task run_phase(uvm_phase phase);
     fifo_trans tr;
     forever begin
@@ -27,6 +28,20 @@ class fifo_monitor extends uvm_monitor;
         ap.write(tr);
       end
     end
-  endtask // run_phase
+  endtask // run_phase\
+`else // !`ifdef FIFO_TEST
+  virtual task run_phase(uvm_phase phase);
+    fifo_trans tr;
+    forever begin
+      @(posedge vif.clk);
+      tr = fifo_trans::type_id::create("tr");
+      tr.i_a = vif.i_a;
+      tr.i_b = vif.i_b;
+      tr.o_c = vif.o_c;
+      ap.write(tr);
+    end
+  endtask // run_phase\
+
+`endif
 
 endclass // fifo_monitor

@@ -24,6 +24,7 @@ class fifo_scoreboard extends uvm_scoreboard;
     pkt_qu.push_back(tr);
   endfunction // write
 
+`ifdef FIFO_TEST
   virtual task run_phase(uvm_phase phase);
     fifo_trans ff_item;
 
@@ -38,6 +39,24 @@ class fifo_scoreboard extends uvm_scoreboard;
       if(str.rd == tr.rd) `uvm_info(get_type_name(), $sformatf("PASS"),UVM_LOW)
       else `uvm_error(get_type_name(), "FAIL")
     end
-  endfunction // write
+  endtask // write
+`else // !`ifdef FIFO_TEST
+
+  virtual task run_phase(uvm_phase phase);
+    fifo_trans ff_item;
+
+    forever begin
+      wait(pkt_qu.size() > 0);
+      ff_item = pkt_qu.pop_front();
+
+      if((ff_item.i_a + ff_item.i_b) == ff_item.o_c) begin
+        `uvm_info(get_type_name(), $sformatf("PASS a=%0d b=%0d c=%0d",ff_item.i_a,ff_item.i_b,ff_item.o_c),UVM_LOW)
+      end else begin
+        `uvm_error(get_type_name(),  $sformatf("FAIL a=%0d b=%0d c=%0d",ff_item.i_a,ff_item.i_b,ff_item.o_c))
+      end
+    end
+
+  endtask // write
+`endif // !`ifdef FIFO_TEST
 
 endclass // fifo_scoreboard

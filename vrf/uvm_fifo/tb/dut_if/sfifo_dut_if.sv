@@ -8,12 +8,13 @@
 // Update Count    : 0
 // Status          : Unknown, Use with caution!
 
+`ifdef FIFO_TEST
 interface sfifo_dut_if #(
                          parameter FIFO_D   = 12,
                          parameter FIFO_W   = 32,
                          parameter FIFO_DLY = 0, //FIFO output delay
                          parameter FIFO_ADR = $clog2(FIFO_D)//do not override
-                         ) 
+                         )
   (
    input clk,
    input rstn
@@ -32,12 +33,26 @@ interface sfifo_dut_if #(
   logic              fifo_udf ;
 
   logic [FIFO_ADR:0] fifo_len ;
-  
+
   //Flush
   logic              fifo_fsh ;
 
   modport tb (input fifo_full,fifo_ovf,fifo_rd,fifo_empt,fifo_udf,fifo_len,
               output fifo_we,fifo_wd,fifo_re,fifo_fsh);
-  
-  
+
+
 endinterface // sfifo_dut_if
+
+`else // !`ifdef FIFO_TEST
+
+interface sfifo_dut_if #(parameter ADD_B=10)
+  (
+   input clk,
+   input rstn
+   );
+
+  logic [ADD_B-1:0]  i_a;
+  logic [ADD_B-1:0]  i_b;
+  logic [ADD_B:0]    o_c;
+endinterface // cnt_if
+`endif // !`ifdef FIFO_TEST
