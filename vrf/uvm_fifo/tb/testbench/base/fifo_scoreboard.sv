@@ -1,10 +1,10 @@
 
 class fifo_scoreboard extends uvm_scoreboard;
 
-  import fifo_para_pkg::*;
+  //import fifo_para_pkg::*;
 
   fifo_trans pkt_qu[$];
-  logic [FF_W-1:0] ffmem [$:FF_D];
+  logic [32-1:0] ffmem [$:16];
 
   uvm_analysis_imp #(fifo_trans, fifo_scoreboard) ap;
 

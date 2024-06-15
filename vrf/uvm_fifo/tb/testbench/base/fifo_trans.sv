@@ -1,6 +1,6 @@
 
 class fifo_trans extends uvm_sequence_item;
-  import fifo_para_pkg::*;
+  //import fifo_para_pkg::*;
 
   //vars
 `ifdef FIFO_TEST

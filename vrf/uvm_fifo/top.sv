@@ -30,10 +30,10 @@ endmodule // cnt
 
 module top;
 
-`include "uvm_pkg.sv"
-import uvm_pkg::*;
-import fifo_para_pkg::*;
-import fifo_pkg::*;
+`include "uvm_macros.svh"
+  import uvm_pkg::*;
+  import fifo_para_pkg::*;
+  import fifo_pkg::*;
 
 
   //---------------------------------------
@@ -61,7 +61,7 @@ import fifo_pkg::*;
 `ifdef FIFO_TEST
   sfifo_dut_if vif(clk,rstn);
 
-`include "svlib_macro.sv"
+ `include "svlib_macro.sv"
   `sfifo_inst(test,FF_D,FF_W,0,clk,rstn)
 
   assign test.fifo_we  = vif.fifo_we;
@@ -89,7 +89,7 @@ import fifo_pkg::*;
      .o_c(vif.o_c)
      );
 
-//`endif // !`ifdef FIFO_TEST
+  //`endif // !`ifdef FIFO_TEST
 
   //---------------------------------------
   //SIM
@@ -110,9 +110,13 @@ import fifo_pkg::*;
   //Dump VCD
   //---------------------------------------
 
-   initial begin
-      $dumpfile("top.vcd");
-      $dumpvars();
-   end
+  initial begin
+`ifdef VERILATOR
+    $dumpfile("top.vcd");
+    $dumpvars();
+`else
+    $wlfdumpvars(0, top);
+`endif
+  end
 
 endmodule // top

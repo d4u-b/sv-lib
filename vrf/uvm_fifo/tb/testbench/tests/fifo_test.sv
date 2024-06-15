@@ -1,7 +1,7 @@
 `include "fifo_base_test.sv"
 
 class fifo_test extends fifo_base_test;
-  import fifo_para_pkg::*;
+  //import fifo_para_pkg::*;
 
   `uvm_component_utils(fifo_test)
   fifo_base_sequence seq;
@@ -31,7 +31,8 @@ class fifo_test extends fifo_base_test;
   endtask // run_phase
 
   virtual task do_rst();
-    repeat(RST_TIME/CK_PER) @(posedge vif.clk);
+    //repeat(RST_TIME/CK_PER) @(posedge vif.clk);
+    repeat(19/10) @(posedge vif.clk);
   endtask // do_rst
 
 endclass // fifo_test

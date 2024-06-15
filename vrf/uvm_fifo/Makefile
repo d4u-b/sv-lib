@@ -42,7 +42,7 @@ $(SIM_DIR)/$(SIM_NAME).mk: $(wildcard hdl/*.sv)
 	$(VERILATOR) --cc --exe --main --timing -Mdir $(SIM_DIR) \
 	${COMPILE_ARGS} ${EXTRA_ARGS} \
 	${VERILOG_DEFINE_FILES} \
-	${WARNING_ARGS} 
+	${WARNING_ARGS}
 #	${GTK_ARGS}
 
 $(SIM_DIR)/$(SIM_NAME): $(SIM_DIR)/$(SIM_NAME).mk
@@ -57,10 +57,23 @@ wave:
 lint:
 	$(VERILATOR) --lint-only -Wall --timing ${VERILOG_DEFINE_FILES}
 
+qrun.sh:
+	qrun -f top.f -uvm -top top -debug +UVM_TESTNAME=${UVM_TEST} -script qrun.sh
+
+qsim: qrun.sh
+	chmod +x qrun.sh && ./qrun.sh
+
+qwave:
+	vsim -view vsim.wlf
+
 clean:
 	rm -rf simv*.daidir csrc
 	rm -rf csrc* simv*
 	rm -rf $(SIM_DIR)
 	rm -rf *.vcd *.log
+	rm -rf qrun*
+	rm -rf transcript
+	rm -rf *.wlf
+	rm -rf modelsim.ini
 
 .PHONY: simulate clean

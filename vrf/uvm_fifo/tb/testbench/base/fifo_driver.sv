@@ -55,10 +55,9 @@ class fifo_driver extends uvm_driver #(fifo_trans);
 `endif
 
   virtual task drive();
-    @(posedge vif.clk) begin
-      vif.i_a <= req.i_a;
-      vif.i_b <= req.i_b;
-    end // UNMATCHED !!
+    @(posedge vif.clk);
+    vif.i_a <= req.i_a;
+    vif.i_b <= req.i_b;
     req.o_c = vif.o_c;
   endtask // drive
 
