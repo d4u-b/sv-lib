@@ -3,7 +3,7 @@ class fifo_monitor extends uvm_monitor;
 
   `uvm_component_utils(fifo_monitor)
 
-  virtual sfifo_dut_if vif;
+  virtual sfifo_dut_if.mon vif;
   uvm_analysis_port #(fifo_trans) ap;
 
   function new(string name, uvm_component parent);
@@ -33,11 +33,12 @@ class fifo_monitor extends uvm_monitor;
   virtual task run_phase(uvm_phase phase);
     fifo_trans tr;
     forever begin
-      @(posedge vif.clk);
       tr = fifo_trans::type_id::create("tr");
-      tr.i_a = vif.i_a;
-      tr.i_b = vif.i_b;
-      tr.o_c = vif.o_c;
+      @(posedge vif.clk);
+      tr.i_a <= vif.cb_mon.i_a;
+      tr.i_b <= vif.cb_mon.i_b;
+      @(posedge vif.clk);
+      tr.o_c = vif.cb_mon.o_c;
       ap.write(tr);
     end
   endtask // run_phase\

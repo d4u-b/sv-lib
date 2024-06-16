@@ -3,7 +3,7 @@ class fifo_driver extends uvm_driver #(fifo_trans);
 
   `uvm_component_utils(fifo_driver)
 
-  virtual sfifo_dut_if vif;
+  virtual sfifo_dut_if.drv vif;
 
   function new(string name, uvm_component parent);
     super.new(name, parent);
@@ -56,9 +56,10 @@ class fifo_driver extends uvm_driver #(fifo_trans);
 
   virtual task drive();
     @(posedge vif.clk);
-    vif.i_a <= req.i_a;
-    vif.i_b <= req.i_b;
-    req.o_c = vif.o_c;
+    vif.cb_drv.i_a <= req.i_a;
+    vif.cb_drv.i_b <= req.i_b;
+    @(posedge vif.clk);
+    req.o_c = vif.cb_drv.o_c;
   endtask // drive
 
 

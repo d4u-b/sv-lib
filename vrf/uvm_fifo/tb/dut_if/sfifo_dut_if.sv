@@ -54,5 +54,21 @@ interface sfifo_dut_if #(parameter ADD_B=10)
   logic [ADD_B-1:0]  i_a;
   logic [ADD_B-1:0]  i_b;
   logic [ADD_B:0]    o_c;
+
+  clocking cb_drv @(posedge clk);
+    default input #1 output #1;
+    output            i_a,i_b;
+    input             o_c;
+  endclocking // drv
+
+  clocking cb_mon @(posedge clk);
+    default input #1 output #1;
+    input            i_a,i_b;
+    input            o_c;
+  endclocking // cb_mon
+
+  modport drv (clocking cb_drv, input clk,rstn);
+  modport mon (clocking cb_mon, input clk,rstn);
+
 endinterface // cnt_if
 `endif // !`ifdef FIFO_TEST
