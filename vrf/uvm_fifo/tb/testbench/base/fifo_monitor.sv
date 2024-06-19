@@ -32,6 +32,10 @@ class fifo_monitor extends uvm_monitor;
 `else // !`ifdef FIFO_TEST
   virtual task run_phase(uvm_phase phase);
     fifo_trans tr;
+    //do_rst();
+
+    wait(vif.rstn);
+
     forever begin
       tr = fifo_trans::type_id::create("tr");
       @(posedge vif.clk);
@@ -42,6 +46,10 @@ class fifo_monitor extends uvm_monitor;
       ap.write(tr);
     end
   endtask // run_phase\
+
+  virtual task do_rst();
+    repeat(`RST_TIME/`CK_PER ) @(posedge vif.clk);
+  endtask // do_rst
 
 `endif
 

@@ -1,9 +1,9 @@
 #+incdir+$UVM_HOME/src
++incdir+$SVLIB/vrf/uvm_fifo/tb/common
 +incdir+$SVLIB/vrf/uvm_fifo/tb/sequences
 +incdir+$SVLIB/vrf/uvm_fifo/tb/testbench/base
 +incdir+$SVLIB/vrf/uvm_fifo/tb/testbench/tests
 #$UVM_HOME/src/uvm.sv
-$SVLIB/vrf/uvm_fifo/tb/common/fifo_defines.sv
 $SVLIB/vrf/uvm_fifo/tb/common/fifo_para_pkg.sv
 $SVLIB/vrf/uvm_fifo/tb/common/fifo_pkg.sv
 $SVLIB/vrf/uvm_fifo/tb/dut_if/sfifo_dut_if.sv

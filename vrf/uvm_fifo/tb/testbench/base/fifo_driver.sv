@@ -35,6 +35,8 @@ class fifo_driver extends uvm_driver #(fifo_trans);
 
 `else // !`ifdef FIFO_TEST
   virtual task run_phase(uvm_phase phase);
+    wait(vif.rstn);
+
     forever begin
       seq_item_port.get_next_item(req);
       drive();

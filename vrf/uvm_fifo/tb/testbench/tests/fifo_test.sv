@@ -24,15 +24,16 @@ class fifo_test extends fifo_base_test;
   virtual task run_phase(uvm_phase phase);
 
     phase.raise_objection(this);
-    do_rst();
+    //do_rst();
+    wait(vif.rstn);
     seq.start(env.agnt.sqr);
     phase.drop_objection(this);
 
   endtask // run_phase
 
   virtual task do_rst();
-    //repeat(RST_TIME/CK_PER) @(posedge vif.clk);
-    repeat(19/10) @(posedge vif.clk);
+    repeat(`RST_TIME/`CK_PER) @(posedge vif.clk);
+    //repeat(19/10) @(posedge vif.clk);
   endtask // do_rst
 
 endclass // fifo_test

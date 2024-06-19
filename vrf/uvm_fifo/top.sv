@@ -27,6 +27,7 @@ module adder
 
 endmodule // cnt
 
+`include "fifo_defines.sv"
 
 module top;
 
@@ -45,13 +46,13 @@ module top;
   //---------------------------------------
   //clock generation
   //---------------------------------------
-  always #(CK_PER/2) clk = ~clk;
+  always #(`CK_PER/2) clk = ~clk;
 
   //---------------------------------------
   //reset Generation
   //---------------------------------------
   initial begin
-    #(RST_TIME) rstn =1;
+    #(`RST_TIME) rstn =1;
   end
 
   //---------------------------------------
