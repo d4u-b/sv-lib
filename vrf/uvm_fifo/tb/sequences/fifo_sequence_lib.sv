@@ -23,13 +23,13 @@ class fifo_base_sequence extends uvm_sequence #(fifo_trans);
 
 `else // !`ifdef FIFO_TEST
   virtual task body();
-    //fifo_trans tr;
+    fifo_trans tr;
     for(int i=0;i<10;i++) begin
-      `uvm_do(req)
-      //tr = fifo_trans::type_id::create("tr");
-      //start_item(tr);
-      //tr.randomize();
-      //finish_item(tr);
+      //`uvm_do(req)
+      tr = fifo_trans::type_id::create("tr");
+      start_item(tr);
+      tr.randomize();
+      finish_item(tr);
     end
   endtask // body
 `endif // !`ifdef FIFO_TEST

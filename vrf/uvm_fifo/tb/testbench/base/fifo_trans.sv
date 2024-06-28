@@ -8,6 +8,7 @@ class fifo_trans extends uvm_sequence_item;
   bit [31:0]      rd;
   bit             we;
   bit             re;
+  bit             fsh;
 `else
   localparam ADD_B = 10;
   rand bit [ADD_B-1:0]      i_a;
